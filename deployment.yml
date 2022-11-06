@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-test-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: argo-test-app
+  template:
+    metadata:
+      labels:
+        app: argo-test-app
+    spec:
+      containers:
+      - image: nginx:stable
+        name: argo-test-app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80    
+        resources:
+          limits:
+            cpu: 300m
+            memory: 200Mi
+          requests:
+            cpu: 200m
+            memory: 100Mi
